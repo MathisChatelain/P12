@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # Define the SQLAlchemy database engine. We'll use SQLite for this example.
-engine = create_engine('sqlite:///user_database.db', echo=True)
+engine = create_engine('sqlite:///database.db', echo=True)
 
 # Create a base class for declarative models
 Base = declarative_base()
