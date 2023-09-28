@@ -1,27 +1,38 @@
-from typing import List
-from typing import Optional
-from datetime import datetime
-from sqlalchemy import ForeignKey
-from sqlalchemy import String
-from sqlalchemy.types import DateTime, UUID
-from sqlalchemy.orm import DeclarativeBase
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-from sqlalchemy.orm import relationship
+from sqlalchemy import create_engine, Column, Integer, String, Sequence
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
 
+# Define the SQLAlchemy database engine. We'll use SQLite for this example.
+engine = create_engine('sqlite:///database.db', echo=True)
 
-class Base(DeclarativeBase):
-    uuid: Mapped[UUID] = mapped_column(UUID(), primary_key=True, nullable=False)
-    created_at: Mapped[datetime] = mapped_column(DateTime(), default=datetime.utcnow)
-    updated_at: Mapped[datetime] = mapped_column(
-        DateTime(), default=datetime.utcnow, onupdate=datetime.utcnow
-    )
-    pass
+# Create a base class for declarative models
+Base = declarative_base()
 
-
+# Define the User model
 class User(Base):
-    __tablename__ = "users"
-    name: Mapped[str] = mapped_column(String(30))
+    __tablename__ = 'users'
 
-    def __repr__(self) -> str:
-        return f"User(id={self.uuid!r}, name={self.name!r}"
+    id = Column(Integer, Sequence('user_id_seq'), primary_key=True)
+    username = Column(String(50), unique=True)
+    email = Column(String(100), unique=True)
+    full_name = Column(String(100))
+
+# Create the database tables
+Base.metadata.create_all(engine)
+
+# Create a session to interact with the database
+Session = sessionmaker(bind=engine)
+session = Session()
+
+# Create a new user
+new_user = User(username='john_doe', email='john@example.com', full_name='John Doe')
+session.add(new_user)
+session.commit()
+
+# Query the database to retrieve the user
+retrieved_user = session.query(User).filter_by(username='john_doe').first()
+print(f"User ID: {retrieved_user.id}, Username: {retrieved_user.username}, Email: {retrieved_user.email}, Full Name: {retrieved_user.full_name}")
+
+# Close the session
+session.close()
+
