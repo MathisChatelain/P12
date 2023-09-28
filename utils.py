@@ -1,3 +1,4 @@
+import click
 from sqlalchemy import create_engine, orm
 from sqlalchemy.orm import Session
 
@@ -26,5 +27,3 @@ def use_session(func):
         return result
 
     return wrapper
-
-def make_menu():

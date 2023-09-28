@@ -1,9 +1,5 @@
 import click
 
-# DB connection
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
-
 from views.validations.mail_input_validation import mail_validation
 from views.validations.password_input_validation import password_validation
 from controllers.authentication import check_user_credentials
@@ -26,20 +22,35 @@ def signup(mail, name, password, password_confirmation):
         phone_number,
         password,
     )
-    # [TODO] Create the user in the database
 
     click.echo(f"{mail} : Hello {name}!, your password is {password}")
 
 
 @click.command()
-@click.option("--mail", prompt="Mail")
-@click.option("--password", prompt="Password")
-def login(mail, password):
+def login():
     """Command that allow to login"""
-    user = None
-    while not user:
-        mail = mail_validation(mail)
-        password = password_validation(password, password)
-        user = check_user_credentials(mail, password)
+    mail = click.prompt("Mail")
+    password = click.prompt("Password")
+    user = check_user_credentials(mail, password)
+    if user:
+        print(user)
+        pass
+    else:
+        authentication_menu()
 
-    click.echo(f"{mail} : Hello you are logged in!")
+
+def authentication_menu():
+    """Menu that allow to choose between login and signup"""
+    click.echo("Authentication Menu")
+    click.echo("Please select an option by typing it's number\n")
+    click.echo("1: Login")
+    click.echo("2: Sign Up\n")
+    choice = click.prompt("-->", type=int)
+    if choice == 1:
+        click.echo("Login\n")
+        login()
+    elif choice == 2:
+        click.echo("Sign Up\n")
+        signup()
+    else:
+        click.echo("Invalid choice")

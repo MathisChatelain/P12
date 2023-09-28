@@ -1,5 +1,4 @@
-from views.authentication import signup, login
+from views.authentication import authentication_menu
 
 if __name__ == "__main__":
-    signup()
-    # authentication()
+    authentication_menu()
