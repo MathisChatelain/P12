@@ -1,9 +1,9 @@
 import click
 
-from views.validations.mail_input_validation import mail_validation
-from views.validations.password_input_validation import password_validation
 from controllers.authentication import check_user_credentials
 from models.users import create_new_user
+from views.validations.mail_input_validation import mail_validation
+from views.validations.password_input_validation import password_validation
 
 
 @click.command()

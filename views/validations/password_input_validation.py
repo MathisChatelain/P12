@@ -1,4 +1,5 @@
 import click
+
 from controllers.password_control import check_password_is_valid
 
 

@@ -1,6 +1,6 @@
-import click
+import os
+
 from sqlalchemy import create_engine, orm
-from sqlalchemy.orm import Session
 
 db_url = "sqlite:///database.db"
 engine = create_engine(db_url)
@@ -27,3 +27,8 @@ def use_session(func):
         return result
 
     return wrapper
+
+
+def clear_terminal():
+    # Clear the terminal screen
+    os.system("cls" if os.name == "nt" else "clear")

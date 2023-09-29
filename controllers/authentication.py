@@ -1,6 +1,7 @@
-from utils import use_session
-from models.users import User
 import click
+
+from models.users import User
+from utils import use_session
 
 
 @use_session

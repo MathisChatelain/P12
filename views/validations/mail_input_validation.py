@@ -1,4 +1,5 @@
 import click
+
 from controllers.mail_control import check_mail_is_in_db, check_mail_is_valid
 
 
