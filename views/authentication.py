@@ -1,9 +1,8 @@
 import click
 
-from models.users import User
-from utils import clear_terminal, use_session, prompt_options
 from controllers.authentication import check_user_credentials
-from models.users import create_new_user
+from models.users import User, create_new_user
+from utils import clear_terminal, prompt_options, use_session
 from views.validations.mail_input_validation import mail_validation
 from views.validations.password_input_validation import password_validation
 
@@ -18,7 +17,7 @@ def signup(mail, name, password, password_confirmation):
     mail = mail_validation(mail)
     password = password_validation(password, password_confirmation)
     phone_number = click.prompt("Phone number")
-    create_new_user(
+    user = create_new_user(
         name,
         mail,
         phone_number,
@@ -26,6 +25,8 @@ def signup(mail, name, password, password_confirmation):
     )
 
     click.echo(f"{mail} : Hello {name}!, your password is {password}")
+    main_menu(user)
+    
 
 
 @click.command()
@@ -48,11 +49,14 @@ def authentication_menu():
         clear=True,
         prompt="Authentication Menu\n",
     )
-    match choice:
-        case 0:
-            login()
-        case 1:
-            signup()
-        case _:
-            # TODO add exception
-            click.echo("Invalid choice")
+    if choice == 0:
+        login()
+    elif choice == 1:
+        signup()
+    else:
+        # TODO add exception
+        click.echo("Invalid choice")
+
+# Path: views/menus.py, this allow to import the main_menu function from views.menus
+# adds comfort while developing
+from views.menus import main_menu
