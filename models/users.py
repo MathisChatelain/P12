@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Sequence, String, create_engine
+from sqlalchemy import Column, Integer, Sequence, Boolean, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 
 from utils import use_session
@@ -19,6 +19,10 @@ class User(Base):
     email = Column(String(100), unique=True)
     phone_number = Column(String(20))
     password = Column(String(50))
+    is_superuser = Column(Boolean, default=False)
+    is_support = Column(Boolean, default=False)
+    is_manager = Column(Boolean, default=False)
+    is_commercial = Column(Boolean, default=False)
 
 
 # Create the database tables

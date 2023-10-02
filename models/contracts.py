@@ -1,4 +1,12 @@
-from sqlalchemy import Column, Integer, Sequence, String, create_engine
+from sqlalchemy import (
+    Column,
+    Integer,
+    Sequence,
+    Boolean,
+    DateTime,
+    String,
+    create_engine,
+)
 from sqlalchemy.ext.declarative import declarative_base
 
 from utils import use_session
@@ -15,6 +23,13 @@ class Contract(Base):
     __tablename__ = "contracts"
 
     id = Column(Integer, Sequence("contract_id_seq"), primary_key=True)
+    client_id = Column(Integer)
+    contact = Column(String(50))
+    total_amount = Column(Integer, default=0)
+    amount_to_pay = Column(Integer, default=0)
+    created_at = Column(DateTime, nullable=False)
+    updated_at = Column(DateTime, nullable=False)
+    status = Column(Boolean, default=False)
 
 
 # Create the database tables
@@ -23,8 +38,7 @@ Base.metadata.create_all(engine)
 
 @use_session
 def create_new_contract(session):
-    """TODO
-    """
+    """TODO"""
     new_contract = Contract()
     session.add(new_contract)
     return new_contract

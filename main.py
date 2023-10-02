@@ -1,6 +1,6 @@
 import sentry_sdk
 
-from views.authentication import authentication_menu
+from views.authentication import AuthenticationMenu
 
 sentry_sdk.init(
     dsn="https://98c783f8159e4964f864f2ddfeb24129@o4505963636391936.ingest.sentry.io/4505963639144448",
@@ -14,4 +14,4 @@ sentry_sdk.init(
 )
 
 if __name__ == "__main__":
-    authentication_menu()
+    AuthenticationMenu.authentication()
