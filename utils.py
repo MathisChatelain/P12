@@ -1,10 +1,12 @@
 import os
 
+import click
 from sqlalchemy import create_engine, orm
 
 db_url = "sqlite:///database.db"
 engine = create_engine(db_url)
-SessionLocal = orm.sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# expire_on_commit=False is used to keep the session alive after a commit
+SessionLocal = orm.sessionmaker(bind=engine, expire_on_commit=False)
 
 
 def use_session(func):
@@ -32,3 +34,30 @@ def use_session(func):
 def clear_terminal():
     # Clear the terminal screen
     os.system("cls" if os.name == "nt" else "clear")
+
+
+def prompt_options(
+    options: list,
+    prompt: str = "Please select an option by typing it's number\n",
+    clear: bool = False,
+    callback=None,
+    errors=[],
+):
+    """Prompt the user to choose an option from a list of options"""
+
+    if clear:
+        clear_terminal()
+
+    for error in errors:
+        click.echo(error)
+    click.echo(prompt)
+    for i, option in enumerate(options):
+        click.echo(f"{i}: {option}\n")
+    choice = click.prompt("-->", type=int)
+    if choice in range(len(options)):
+        return choice
+    else:
+        if callback:
+            callback()
+        else:
+            return prompt_options(options, prompt, clear, callback, ["Invalid choice"])
