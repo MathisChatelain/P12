@@ -24,6 +24,9 @@ class Client(Base):
     society_name = Column(String(50), default="")
     epic_event_contact = Column(String(50), default="")
 
+    def _to_repr(self):
+        return str(f"{self.name}, from {self.society_name}")
+
 
 # Create the database tables
 Base.metadata.create_all(engine)

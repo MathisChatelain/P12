@@ -8,7 +8,7 @@ from utils import prompt_options, use_session
 @use_session
 def model_list(model, page=0 , session: Session=Session()):
     # TODO correctly display the model list
-    return [str(model.id) for model in session.query(model).all()]
+    return [model._to_repr() for model in session.query(model).all()]
 
 
 class SharedMenu:
@@ -25,7 +25,9 @@ class SharedMenu:
         )
         options = {0: Client, 1: Contract, 2: Event, 3: User}
         if model := options.get(choice):
-            model_list(model=model)
+            elements = model_list(model=model)
+            for index, elem in enumerate(elements):
+                click.echo(f"{index} - {elem}")
         else:
             return "main", user
         return "dashboards", user

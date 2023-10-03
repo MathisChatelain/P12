@@ -25,6 +25,8 @@ class User(Base):
     is_manager = Column(Boolean, default=False)
     is_commercial = Column(Boolean, default=False)
 
+    def _to_repr(self):
+        return str(f"User: {self.name} at {self.email}")
 
 # Create the database tables
 Base.metadata.create_all(engine)

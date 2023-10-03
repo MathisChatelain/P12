@@ -25,6 +25,9 @@ class Event(Base):
     attendees = Column(Integer, default=0)
     notes = Column(String(100))
 
+    def _to_repr(self):
+        return str(f"Event: {self.id}")
+
 
 # Create the database tables
 Base.metadata.create_all(engine)

@@ -46,7 +46,7 @@ class AuthenticationMenu:
     def authentication(self):
         """Menu that allow to choose between login and signup"""
         choice = prompt_options(
-            ["Login", "Sign Up"],
+            ["Login", "Sign Up", "Quit"],
             callback=self.authentication,
             clear=True,
             prompt="Authentication Menu\n",
@@ -57,6 +57,8 @@ class AuthenticationMenu:
         elif choice == 1:
             menu, user = signup()
             return menu, user
+        elif choice == 2:
+            return "exit", None
         else:
             # TODO add exception
             click.echo("Invalid choice")

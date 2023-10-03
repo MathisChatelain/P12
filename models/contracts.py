@@ -24,6 +24,9 @@ class Contract(Base):
     updated_at = Column(DateTime, nullable=False)
     status = Column(Boolean, default=False)
 
+    def _to_repr(self):
+        return str(f"Contract: {self.id}")
+
 
 # Create the database tables
 Base.metadata.create_all(engine)
