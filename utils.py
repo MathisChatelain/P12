@@ -18,7 +18,7 @@ def use_session(func):
 
         try:
             # Pass the session to the decorated function
-            result = func(session, *args, **kwargs)
+            result = func(session=session, **kwargs)
             session.commit()  # Commit the changes to the database
         except Exception as e:
             session.rollback()  # Rollback in case of an exception
@@ -42,7 +42,7 @@ def prompt_options(
     clear: bool = False,
     callback=None,
     errors=[],
-):
+) -> int:
     """Prompt the user to choose an option from a list of options"""
 
     if clear:
@@ -60,4 +60,5 @@ def prompt_options(
         if callback:
             callback()
         else:
-            return prompt_options(options, prompt, clear, callback, ["Invalid choice"])
+            prompt_options(options, prompt, clear, callback, ["Invalid choice"])
+    return -1

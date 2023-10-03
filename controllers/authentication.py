@@ -1,11 +1,12 @@
 import click
+from sqlalchemy.orm import Session
 
-from models.users import User
+from models import User
 from utils import use_session
 
 
 @use_session
-def check_user_credentials(session, mail, password):
+def check_user_credentials(mail: str, password: str, session: Session = Session()):
     """Check if the mail and password match an user in the database"""
     user = (
         session.query(User)

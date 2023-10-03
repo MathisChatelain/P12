@@ -1,12 +1,5 @@
-from sqlalchemy import (
-    Column,
-    Integer,
-    Sequence,
-    Boolean,
-    DateTime,
-    String,
-    create_engine,
-)
+from sqlalchemy import (Boolean, Column, DateTime, Integer, Sequence, String,
+                        create_engine)
 from sqlalchemy.ext.declarative import declarative_base
 
 from utils import use_session

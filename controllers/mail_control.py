@@ -1,4 +1,6 @@
-def check_mail_is_valid(mail: str) -> (bool, [str]):
+from typing import List, Tuple
+
+def check_mail_is_valid(mail: str) -> Tuple[bool, List[str]]:
     """Check if the mail is valid and return a list of errors if not (is_valid, errors)"""
     errors = []
 

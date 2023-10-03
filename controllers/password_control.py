@@ -1,4 +1,6 @@
-def check_password_is_valid(password: str, password_confirmation) -> (bool, [str]):
+from typing import List, Tuple
+
+def check_password_is_valid(password: str, password_confirmation) -> Tuple[bool, List[str]]:
     """Check if the password is valid and return a list of errors if not (is_valid, errors)"""
     errors = []
 

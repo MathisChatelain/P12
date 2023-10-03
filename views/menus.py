@@ -2,16 +2,7 @@ import click
 
 from models.users import User
 from utils import clear_terminal, prompt_options, use_session
-
-try:
-    from views.authentication import AuthenticationMenu
-except ImportError:
-    pass
-
-try:
-    from views.shared_menus import SharedMenu
-except ImportError:
-    pass
+from views import AuthenticationMenu, SharedMenu
 
 
 class MainMenu:
@@ -28,12 +19,12 @@ class MainMenu:
             prompt=phrase,
         )
         if choice == 0:
-            SharedMenu.dashboards(user)
+            SharedMenu().dashboards(user)
         elif choice == 1:
             # TODO add show all tasks command
             pass
         elif choice == 2:
-            AuthenticationMenu.authentication()
+            AuthenticationMenu().authentication()
         elif choice == 3:
             clear_terminal()
             click.echo("Goodbye!")

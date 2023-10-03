@@ -14,4 +14,4 @@ sentry_sdk.init(
 )
 
 if __name__ == "__main__":
-    AuthenticationMenu.authentication()
+    AuthenticationMenu().authentication()
