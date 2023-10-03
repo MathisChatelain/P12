@@ -3,7 +3,7 @@ import click
 from controllers.authentication import check_user_credentials
 from models.users import User, create_new_user
 from utils import clear_terminal, prompt_options, use_session
-from views import MainMenu if 
+from views import MainMenu
 from views.validations.mail_input_validation import mail_validation
 from views.validations.password_input_validation import password_validation
 
