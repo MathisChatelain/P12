@@ -28,7 +28,4 @@ class SharedMenu:
             model_list(model=model)
         else:
             return "main", user
-
-        # ● Tous les collaborateurs doivent pouvoir accéder à tous les clients,
-        # contrats et événements en lecture seule.
-        pass
+        return "dashboards", user

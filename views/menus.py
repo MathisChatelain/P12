@@ -21,7 +21,7 @@ class MainMenu:
             return "dashboards", user
         elif choice == 1:
             # TODO add show all tasks command
-            pass
+            return "main", user
         elif choice == 2:
             return "authentication", None
         elif choice == 3:
@@ -31,4 +31,4 @@ class MainMenu:
         else:
             # TODO add exception
             click.echo("Invalid choice")
-        click.pause("Press any key to continue...")
+            return "exit", None
