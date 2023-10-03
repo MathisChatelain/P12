@@ -2,7 +2,6 @@ import click
 
 from models.users import User
 from utils import clear_terminal, prompt_options, use_session
-from views import AuthenticationMenu, SharedMenu
 
 
 class MainMenu:
@@ -19,12 +18,12 @@ class MainMenu:
             prompt=phrase,
         )
         if choice == 0:
-            SharedMenu().dashboards(user)
+            return "dashboards", user
         elif choice == 1:
             # TODO add show all tasks command
             pass
         elif choice == 2:
-            AuthenticationMenu().authentication()
+            return "authentication", None
         elif choice == 3:
             clear_terminal()
             click.echo("Goodbye!")

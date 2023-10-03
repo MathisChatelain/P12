@@ -3,7 +3,6 @@ from sqlalchemy.orm.session import Session
 
 from models import Client, Contract, Event, User
 from utils import prompt_options, use_session
-from views import MainMenu
 
 
 @use_session
@@ -28,7 +27,7 @@ class SharedMenu:
         if model := options.get(choice):
             model_list(model=model)
         else:
-            MainMenu().menu(user)
+            return "main", user
 
         # ● Tous les collaborateurs doivent pouvoir accéder à tous les clients,
         # contrats et événements en lecture seule.

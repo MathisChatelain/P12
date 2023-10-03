@@ -3,21 +3,17 @@ import click
 from controllers.authentication import check_user_credentials
 from models.users import User, create_new_user
 from utils import clear_terminal, prompt_options, use_session
-from views import MainMenu
 from views.validations.mail_input_validation import mail_validation
 from views.validations.password_input_validation import password_validation
+from sqlalchemy.orm import Session
 
 
-@click.command()
-@click.option("--mail", prompt="Mail")
-@click.option("--name", prompt="Name")
-@click.option("--password", prompt="Password")
-@click.option("--password_confirmation", prompt="Password confirmation")
 @use_session
-def signup(session,mail, name, password, password_confirmation):
+def signup(session: Session = Session()):
     """Command that allow to create a new user"""
-    mail = mail_validation(mail)
-    password = password_validation(password, password_confirmation)
+    mail = mail_validation(click.prompt("Mail"))
+    name = click.prompt("Name")
+    password = password_validation(click.prompt("Password"), click.prompt("Password confirmation"))
     phone_number = click.prompt("Phone number")
     user = create_new_user(
         session,
@@ -28,19 +24,19 @@ def signup(session,mail, name, password, password_confirmation):
     )
 
     click.echo(f"{mail} : Hello {name}!, your password is {password}")
-    MainMenu().menu(user)
+    return "main", user
 
 
-@click.command()
+
 def login():
     """Command that allow to login"""
     mail = click.prompt("Mail")
     password = click.prompt("Password")
     user = check_user_credentials(mail=mail, password=password)
     if user:
-        MainMenu().menu(user)
+        return "main", user
     else:
-        AuthenticationMenu().authentication()
+        return "authentication", None
 
 
 class AuthenticationMenu:
@@ -56,9 +52,12 @@ class AuthenticationMenu:
             prompt="Authentication Menu\n",
         )
         if choice == 0:
-            login()
+            menu, user = login()
+            return menu, user
         elif choice == 1:
-            signup()
+            menu, user = signup()
+            return menu, user
         else:
             # TODO add exception
             click.echo("Invalid choice")
+            return "exit", None
