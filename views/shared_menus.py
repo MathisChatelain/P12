@@ -28,6 +28,7 @@ class SharedMenu:
             elements = model_list(model=model)
             for index, elem in enumerate(elements):
                 click.echo(f"{index} - {elem}")
+            click.pause("Press any key to continue...")
+            return "dashboards", user
         else:
             return "main", user
-        return "dashboards", user

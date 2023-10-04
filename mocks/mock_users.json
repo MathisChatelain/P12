@@ -1,0 +1,112 @@
+[
+    {
+        "name": "Super User",
+        "email": "a",
+        "phone_number": "513-840-4104x62590",
+        "password": "a",
+        "is_superuser": false,
+        "is_support": false,
+        "is_manager": false,
+        "is_commercial": false
+    },
+    {
+        "name": "Douglas Moon",
+        "email": "egarcia@example.com",
+        "phone_number": "513-840-4104x62590",
+        "password": "#5YiX4Ku",
+        "is_superuser": false,
+        "is_support": false,
+        "is_manager": true,
+        "is_commercial": true
+    },
+    {
+        "name": "Joshua Woodard",
+        "email": "wheelerkenneth@example.net",
+        "phone_number": "001-884-421-2793x4304",
+        "password": "^7yk60Bn",
+        "is_superuser": false,
+        "is_support": true,
+        "is_manager": false,
+        "is_commercial": false
+    },
+    {
+        "name": "Cesar Ochoa",
+        "email": "bjohnston@example.com",
+        "phone_number": "001-621-301-2434x273",
+        "password": "+_28NNb(",
+        "is_superuser": false,
+        "is_support": false,
+        "is_manager": false,
+        "is_commercial": false
+    },
+    {
+        "name": "Leonard Hart",
+        "email": "patrick14@example.com",
+        "phone_number": "(560)683-1778x1716",
+        "password": "5(z8_Jdo",
+        "is_superuser": false,
+        "is_support": false,
+        "is_manager": true,
+        "is_commercial": true
+    },
+    {
+        "name": "Danielle Smith",
+        "email": "perezrobert@example.org",
+        "phone_number": "809-255-9946x29437",
+        "password": "#28GWrfx",
+        "is_superuser": false,
+        "is_support": false,
+        "is_manager": true,
+        "is_commercial": true
+    },
+    {
+        "name": "Thomas Walters",
+        "email": "michael95@example.org",
+        "phone_number": "(496)822-8463x7453",
+        "password": "%54YuEYc",
+        "is_superuser": false,
+        "is_support": false,
+        "is_manager": false,
+        "is_commercial": false
+    },
+    {
+        "name": "Jesse Freeman",
+        "email": "simpsonmary@example.org",
+        "phone_number": "001-787-593-0312x5102",
+        "password": "!i6UmejK",
+        "is_superuser": false,
+        "is_support": false,
+        "is_manager": true,
+        "is_commercial": true
+    },
+    {
+        "name": "Stephanie Leon",
+        "email": "nsullivan@example.com",
+        "phone_number": "001-992-557-1441x9385",
+        "password": "&8Gu6zF!",
+        "is_superuser": false,
+        "is_support": true,
+        "is_manager": true,
+        "is_commercial": false
+    },
+    {
+        "name": "Sarah Cook",
+        "email": "nicole93@example.net",
+        "phone_number": "767.357.8918x660",
+        "password": "U+irx2Sl",
+        "is_superuser": false,
+        "is_support": false,
+        "is_manager": true,
+        "is_commercial": true
+    },
+    {
+        "name": "Scott Murray",
+        "email": "lopezcarol@example.net",
+        "phone_number": "4263166524",
+        "password": "@uJJ#6Fa",
+        "is_superuser": false,
+        "is_support": true,
+        "is_manager": true,
+        "is_commercial": false
+    }
+]
