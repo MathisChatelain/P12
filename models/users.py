@@ -1,6 +1,7 @@
-from sqlalchemy import (Boolean, Column, Integer, Sequence, String,
-                        create_engine)
+from sqlalchemy import Boolean, Column, Integer, Sequence, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
+
+from sqlalchemy.orm import Session
 
 from utils import use_session
 
@@ -28,18 +29,64 @@ class User(Base):
     def _to_repr(self):
         return str(f"User: {self.name} at {self.email}")
 
+    def data_to_str(self):
+        return [
+            f"{key}: {value}"
+            for key, value in self.__dict__.items()
+            if type(value) != bool
+        ]
+
+
 # Create the database tables
 Base.metadata.create_all(engine)
 
 
 @use_session
-def create_new_user(session, name, email, phone_number, password):
+def create_new_user(
+    session,
+    name,
+    email,
+    phone_number,
+    password,
+    is_superuser=False,
+    is_support=False,
+    is_manager=False,
+    is_commercial=False,
+):
     """
     Create a new user ('name', 'email', 'phone_number', 'password')
     in the database and return it, if the user already exist return None
     """
     new_user = User(
-        name=name, email=email, phone_number=phone_number, password=password
+        name=name,
+        email=email,
+        phone_number=phone_number,
+        password=password,
+        is_superuser=is_superuser,
+        is_support=is_support,
+        is_manager=is_manager,
+        is_commercial=is_commercial,
     )
     session.add(new_user)
     return new_user
+
+
+@use_session
+def update_user(session, user, **kwargs):
+    """
+    Update a user with the new values in kwargs
+    """
+    for key, value in kwargs.items():
+        setattr(user, key, value)
+    session.commit()
+    return user
+
+
+@use_session
+def get_user_from_key(session: Session = Session(), key=""):
+    user = session.query(User).filter(User.id == key).first()
+    for field in ["name", "email", "phone_number"]:
+        if user:
+            return user
+        user = session.query(User).filter(getattr(User, field) == key).first()
+    return None

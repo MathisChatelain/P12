@@ -9,11 +9,13 @@ from sqlalchemy.orm import Session
 
 
 @use_session
-def signup(session: Session = Session()):
+def signup(session: Session = Session(), connect=True):
     """Command that allow to create a new user"""
     mail = mail_validation(click.prompt("Mail"))
     name = click.prompt("Name")
-    password = password_validation(click.prompt("Password"), click.prompt("Password confirmation"))
+    password = password_validation(
+        click.prompt("Password"), click.prompt("Password confirmation")
+    )
     phone_number = click.prompt("Phone number")
     user = create_new_user(
         session,
@@ -23,9 +25,9 @@ def signup(session: Session = Session()):
         password=password,
     )
 
-    click.echo(f"{mail} : Hello {name}!, your password is {password}")
+    if connect:
+        click.echo(f"{mail} : Hello {name}!, your password is {password}")
     return "main", user
-
 
 
 def login():

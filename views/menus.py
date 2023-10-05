@@ -20,8 +20,7 @@ class MainMenu:
         if choice == 0:
             return "dashboards", user
         elif choice == 1:
-            # TODO add show all tasks command
-            return "main", user
+            return "action_menu", user
         elif choice == 2:
             return "authentication", None
         elif choice == 3:

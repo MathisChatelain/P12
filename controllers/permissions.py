@@ -24,6 +24,7 @@ def get_permissions(user: User):
         - update his events
 
     """
+    print(user.__dict__)
 
     if user.is_superuser:
         return "superuser"

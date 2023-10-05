@@ -4,7 +4,7 @@
         "email": "a",
         "phone_number": "513-840-4104x62590",
         "password": "a",
-        "is_superuser": false,
+        "is_superuser": true,
         "is_support": false,
         "is_manager": false,
         "is_commercial": false
