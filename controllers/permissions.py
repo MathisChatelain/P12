@@ -25,4 +25,14 @@ def get_permissions(user: User):
 
     """
 
-    return None
+    if user.is_superuser:
+        return "superuser"
+    elif user.is_manager:
+        return "manager"
+    elif user.is_commercial:
+        return "commercial"
+    elif user.is_support:
+        return "support"
+    else:
+        # TODO add exception
+        return "user"

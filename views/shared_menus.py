@@ -42,6 +42,26 @@ class ActionMenu:
     def __init__(self):
         pass
 
-    def actions(self, user):
+    def menu(self, user):
         role = get_permissions(user)
+        if role == "superuser":
+            return self.superuser_menu(user)
+        elif role == "support":
+            return self.support_menu(user)
+        elif role == "commercial":
+            return self.commercial_menu(user)
+        elif role == "manager":
+            return self.manager_menu(user)
+        return "main", user
+
+    def superuser_menu(self, user):
+        return "main", user
+
+    def support_menu(self, user):
+        return "main", user
+
+    def commercial_menu(self, user):
+        return "main", user
+
+    def manager_menu(self, user):
         return "main", user
