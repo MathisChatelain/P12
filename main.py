@@ -18,22 +18,24 @@ sentry_sdk.init(
     profiles_sample_rate=1.0,
 )
 
+menu_options = {
+    "authentication": authentication_menu.authentication,
+    "main": main_menu.menu,
+    "dashboards": shared_menu.dashboards,
+    "action_menu": action_menu.menu,
+    "manager_menu": action_menu.manager_menu,
+}
+
 if __name__ == "__main__":
     menu_return_value, user = authentication_menu.authentication()
 
     while menu_return_value != "exit":
-        print(menu_return_value)
-        if menu_return_value == "authentication":
-            menu_return_value, user = authentication_menu.authentication()
+        print("xxxxx", menu_return_value)
 
-        elif menu_return_value == "main" and user is not None:
-            menu_return_value, user = main_menu.menu(user=user)
-
-        elif menu_return_value == "dashboards" and user is not None:
-            menu_return_value, user = shared_menu.dashboards(user=user)
-
-        elif menu_return_value == "action_menu" and user is not None:
-            menu_return_value, user = action_menu.menu(user=user)
+        if user is not None:
+            menu_function = menu_options.get(menu_return_value)
+            if menu_function:
+                menu_return_value, user = menu_function(user=user)
 
         else:
             print("Error", menu_return_value)

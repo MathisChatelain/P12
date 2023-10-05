@@ -60,6 +60,7 @@ class ActionMenu:
         return "main", user
 
     def superuser_menu(self, user):
+        """This is a sub menu only accessible by superuser, it allows to select any of the roles to impersonate"""
         click.echo("Superuser sub-menu")
         choice: int = prompt_options(
             ["Support menu", "Commercial menu", "Manager menu", "Else : Back"],
