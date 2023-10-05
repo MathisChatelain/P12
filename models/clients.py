@@ -1,6 +1,7 @@
-from sqlalchemy import (Column, DateTime, Integer, Sequence, String,
-                        create_engine)
+from sqlalchemy import Column, DateTime, Integer, Sequence, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
+
+from datetime import datetime
 
 from utils import use_session
 
@@ -33,8 +34,19 @@ Base.metadata.create_all(engine)
 
 
 @use_session
-def create_new_client(session):
-    """TODO"""
-    new_client = Client()
+def create_new_client(
+    session, email, phone_number, name, society_name, epic_event_contact
+):
+    created_at = datetime.now()
+    updated_at = datetime.now()
+    new_client = Client(
+        email="",
+        phone_number="",
+        name="",
+        society_name="",
+        epic_event_contact="",
+        created_at=created_at,
+        updated_at=updated_at,
+    )
     session.add(new_client)
     return new_client

@@ -12,7 +12,7 @@ class MainMenu:
         """Menu that allow to choose between the main commands of the application"""
         phrase = f"Main Menu\nYou are connected as {user.name}\n"
         choice = prompt_options(
-            ["Show dashboards", "Show all tasks", "Exit"],
+            ["Show dashboards (readonly)", "Show my actions", "Exit"],
             callback=self.menu,
             clear=True,
             prompt=phrase,

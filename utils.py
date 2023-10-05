@@ -8,6 +8,7 @@ engine = create_engine(db_url)
 # expire_on_commit=False is used to keep the session alive after a commit
 SessionLocal = orm.sessionmaker(bind=engine, expire_on_commit=False)
 
+
 def use_session(func):
     """Decorator that provide a session to the decorated function and autoclose it"""
 
@@ -32,7 +33,6 @@ def use_session(func):
 
 def clear_terminal():
     # Clear the terminal screen
-    return None
     os.system("cls" if os.name == "nt" else "clear")
 
 
