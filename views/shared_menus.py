@@ -48,7 +48,6 @@ class ActionMenu:
 
     def menu(self, user):
         role = get_permissions(user)
-        print(role)
         if role == "superuser":
             return self.superuser_menu(user)
         elif role == "support":
@@ -74,10 +73,25 @@ class ActionMenu:
             return self.commercial_menu(user)
         elif choice == 2:
             return self.manager_menu(user)
-        return "main", user
+        else:
+            return "action_menu", user
 
     def support_menu(self, user):
-        return "main", user
+        click.echo("Support menu")
+        choice: int = prompt_options(
+            ["Show events", "Update my events", "Else : Back"],
+            callback=self.support_menu,
+            clear=True,
+            prompt="",
+        )
+        if choice == 0:
+            # TODO add show events command
+            return "support_menu", user
+        elif choice == 1:
+            # TODO add update my events command
+            return "support_menu", user
+        else:
+            return "action_menu", user
 
     def commercial_menu(self, user):
         return "main", user
@@ -118,4 +132,5 @@ class ActionMenu:
             # TODO add show events command
             return "manager_menu", user
 
-        return "main", user
+        else:
+            return "action_menu", user

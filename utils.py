@@ -33,7 +33,6 @@ def use_session(func):
 
 def clear_terminal():
     # Clear the terminal screen
-    return None
     os.system("cls" if os.name == "nt" else "clear")
 
 
@@ -52,9 +51,11 @@ def prompt_options(
     for error in errors:
         click.echo(error)
     click.echo(prompt)
+
     for i, option in enumerate(options):
         click.echo(f"{i}: {option}\n")
     choice = click.prompt("-->", type=int)
+
     if choice in range(len(options)):
         return choice
     else:

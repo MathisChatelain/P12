@@ -2,6 +2,7 @@ from sqlalchemy import Boolean, Column, Integer, Sequence, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 
 from sqlalchemy.orm import Session
+from sqlalchemy.sql import select
 
 from utils import use_session
 
@@ -19,7 +20,7 @@ class User(Base):
     id = Column(Integer, Sequence("user_id_seq"), primary_key=True)
     name = Column(String(50), unique=True)
     email = Column(String(100), unique=True)
-    phone_number = Column(String(20))
+    phone_number = Column(String(20), unique=True)
     password = Column(String(50))
     is_superuser = Column(Boolean, default=False)
     is_support = Column(Boolean, default=False)
@@ -72,13 +73,13 @@ def create_new_user(
 
 
 @use_session
-def update_user(session, user, **kwargs):
+def update_user(session, user: User, **kwargs):
     """
     Update a user with the new values in kwargs
     """
     for key, value in kwargs.items():
         setattr(user, key, value)
-    session.commit()
+    session.update(user)
     return user
 
 

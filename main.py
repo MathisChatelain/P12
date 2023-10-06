@@ -30,8 +30,6 @@ if __name__ == "__main__":
     menu_return_value, user = authentication_menu.authentication()
 
     while menu_return_value != "exit":
-        print("xxxxx", menu_return_value)
-
         if user is not None:
             menu_function = menu_options.get(menu_return_value)
             if menu_function:
