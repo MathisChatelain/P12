@@ -1,7 +1,7 @@
 import click
 
 from models.users import User
-from utils import clear_terminal, prompt_options, use_session
+from utils import clear_terminal, prompt_options
 
 
 class MainMenu:
