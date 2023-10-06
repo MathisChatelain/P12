@@ -1,6 +1,6 @@
 import sentry_sdk
 
-from views import MainMenu, AuthenticationMenu, SharedMenu, ActionMenu
+from views import ActionMenu, AuthenticationMenu, MainMenu, SharedMenu
 
 main_menu = MainMenu()
 shared_menu = SharedMenu()

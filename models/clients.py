@@ -1,7 +1,8 @@
-from sqlalchemy import Column, DateTime, Integer, Sequence, String, create_engine
-from sqlalchemy.ext.declarative import declarative_base
-
 from datetime import datetime
+
+from sqlalchemy import (Column, DateTime, Integer, Sequence, String,
+                        create_engine)
+from sqlalchemy.ext.declarative import declarative_base
 
 from utils import use_session
 
@@ -32,7 +33,7 @@ class Client(Base):
         return [
             f"{key}: {value}"
             for key, value in self.__dict__.items()
-            if type(value) != bool
+            if isinstance(value, bool) is False
         ]
 
 

@@ -1,8 +1,10 @@
+from datetime import datetime
+
 from sqlalchemy import DATE, Column, Integer, Sequence, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
+
 from utils import use_session
-from datetime import datetime
 
 # Define the SQLAlchemy database engine. We'll use SQLite for this example.
 engine = create_engine("sqlite:///database.db", echo=True)
@@ -33,7 +35,7 @@ class Event(Base):
         return [
             f"{key}: {value}"
             for key, value in self.__dict__.items()
-            if type(value) != bool
+            if isinstance(value, bool) is False
         ]
 
 

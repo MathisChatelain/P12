@@ -1,14 +1,11 @@
 import click
 from sqlalchemy.orm.session import Session
 
-from models import Client, Contract, Event
+from controllers.permissions import get_permissions
+from models import Client, Contract, Event, User
+from models.users import get_user_from_key
 from utils import prompt_options, use_session
 from views.authentication import signup
-
-from models.users import get_user_from_key
-from models import User
-
-from controllers.permissions import get_permissions
 
 
 @use_session
