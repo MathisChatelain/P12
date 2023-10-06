@@ -37,3 +37,6 @@ def get_permissions(user: User):
     else:
         # TODO add exception
         return "user"
+
+
+# TODO ADD back end filter for permissions

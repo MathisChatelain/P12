@@ -1,0 +1,5 @@
+[run]
+omit =
+    */views/authentication.py
+    */views/menus.py
+    */views/shared_menus.py

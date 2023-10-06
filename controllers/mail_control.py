@@ -20,7 +20,7 @@ def check_mail_is_valid(mail: str) -> Tuple[bool, List[str]]:
 
 
 @use_session
-def check_mail_is_in_db(mail: str) -> bool:
+def check_mail_is_in_db(session, mail: str) -> bool:
     """Check if the mail is in the database and return a list of errors if not (is_valid, errors)"""
     # [TODO] Check if the mail is in the database
     return False
