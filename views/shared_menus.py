@@ -3,7 +3,7 @@ from sqlalchemy.orm.session import Session
 
 from controllers.permissions import get_permissions
 from models import Client, Contract, Event, User
-from models.users import get_user_from_key
+from models.users import get_user_from_key, update_user
 from utils import prompt_options, use_session
 from views.authentication import signup
 
@@ -91,7 +91,33 @@ class ActionMenu:
             return "action_menu", user
 
     def commercial_menu(self, user):
-        return "main", user
+        click.echo("Commercial menu")
+        choice: int = prompt_options(
+            [
+                "Create client",
+                "Update client",
+                "Create contract",
+                "Update contract",
+                "Else : Back",
+            ],
+            callback=self.commercial_menu,
+            clear=True,
+            prompt="",
+        )
+        if choice == 0:
+            # TODO add show events command
+            return "commercial_menu", user
+        elif choice == 1:
+            # TODO add update my events command
+            return "commercial_menu", user
+        elif choice == 2:
+            # TODO add update my contract command
+            return "commercial_menu", user
+        elif choice == 3:
+            # TODO add update my contract command
+            return "commercial_menu", user
+        else:
+            return "action_menu", user
 
     def manager_menu(self, user):
         click.echo("Manager menu")
@@ -109,7 +135,6 @@ class ActionMenu:
             return "manager_menu", user
 
         elif choice == 1:
-            # TODO add update user command
             user_key = click.prompt(
                 "Select user to update (you can use mail, id, phone number or name)"
             )
@@ -119,7 +144,15 @@ class ActionMenu:
                 click.echo(f"User {user_to_update.name} found")
                 for field in user_to_update.data_to_str():
                     click.echo(field)
-                # TODO add update user command
+                _, new_user = signup(connect=False)
+                update_user(
+                    user_to_update,
+                    name=new_user.name,
+                    email=new_user.email,
+                    phone_number=new_user.phone_number,
+                    password=new_user.password,
+                )
+
             else:
                 click.echo("No user found with any of the given keys")
 

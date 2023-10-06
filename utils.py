@@ -33,6 +33,7 @@ def use_session(func):
 
 def clear_terminal():
     # Clear the terminal screen
+    return None
     os.system("cls" if os.name == "nt" else "clear")
 
 

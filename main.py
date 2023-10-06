@@ -1,5 +1,6 @@
 import sentry_sdk
 
+from utils import clear_terminal
 from views import ActionMenu, AuthenticationMenu, MainMenu, SharedMenu
 
 main_menu = MainMenu()
@@ -29,13 +30,12 @@ menu_options = {
 if __name__ == "__main__":
     menu_return_value, user = authentication_menu.authentication()
 
-    while menu_return_value != "exit":
+    while menu_return_value != "exit" and menu_return_value != ("exit", None):
         if user is not None:
             menu_function = menu_options.get(menu_return_value)
             if menu_function:
                 menu_return_value, user = menu_function(user=user)
 
         else:
-            print("Error", menu_return_value)
             menu_return_value = authentication_menu.authentication()
-            print("Error")
+    clear_terminal()
